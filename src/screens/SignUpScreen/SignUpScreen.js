@@ -10,13 +10,22 @@ const SignUpScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState(false);
 
   const navigation = useNavigation();
 
   const onRegisterPressed = () => {
-    console.warn("Successfully Registered");
-    // navigation.navigate("ConfirmEmail");
-    navigation.navigate("SignIn", { userNames: userName, passwords: password });
+    if (password === passwordRepeat) {
+      setIsPasswordMatch(true);
+      console.warn("Successfully Registered");
+      // navigation.navigate("ConfirmEmail");
+      navigation.navigate("SignIn", {
+        userNames: userName,
+        passwords: password,
+      });
+    } else {
+      alert("Password and repeat password don't match");
+    }
   };
   const onSignInPressed = () => {
     navigation.navigate("SignIn", { userNames: userName, passwords: password });
