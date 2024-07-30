@@ -5,7 +5,7 @@ import {
   ScrollView,
   StyleSheet,
   useWindowDimensions,
-  View
+  View,
 } from "react-native";
 import Logo from "../../../assets/pic.jpg";
 import CustomInput from "../../components/CustomInput";
@@ -15,18 +15,24 @@ import SocialSignInButtons from "../../components/SocialSignInButtons";
 const SignInScreen = ({ route }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const userName = route.params?.userNames;
-  const passwords = route.params?.passwords;
+  const userNameParam = route.params?.userNames;
+  const passwordParam = route.params?.passwords;
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
 
+  const getUserNameAndPassword = () => {
+    return { username, password };
+  };
 
-  const onSignInPressed = () => {
-    console.warn("Sign In");
-    console.log(username, password, userName, passwords);
-    //validate user
-    if (username === userName && password === passwords) {
+  const validateUser = () => {
+    const { username, password } = getUserNameAndPassword();
+    return username === userNameParam && password === passwordParam;
+  };
+
+  const handleSignIn = () => {
+    console.log(username, password, userNameParam, passwordParam);
+    if (validateUser()) {
       navigation.navigate("Home");
     }
   };
@@ -57,7 +63,7 @@ const SignInScreen = ({ route }) => {
           setValue={setPassword}
           secureTextEntry
         />
-        <CustomButton text="Sign In" onPress={onSignInPressed} />
+        <CustomButton text="Sign In" onPress={handleSignIn} />
         <CustomButton
           text="Forgot Password?"
           onPress={onForgotPasswordPressed}

@@ -15,7 +15,7 @@ const ForgotPasswordScreen = () => {
         navigation.navigate('NewPassword');
     }
     
-    const onSignInPressed = () => {
+    const handleSignIn = () => {
       navigation.navigate('SignIn');
   }
 
@@ -36,7 +36,7 @@ const ForgotPasswordScreen = () => {
 
        <CustomButton
          text="Back to Sign in" 
-         onPress={onSignInPressed} 
+         onPress={handleSignIn} 
          type="TERTIARY"
          />
 

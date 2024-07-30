@@ -14,7 +14,7 @@ const SignUpScreen = () => {
 
   const navigation = useNavigation();
 
-  const onRegisterPressed = () => {
+  const registerUser = () => {
     if (password === passwordRepeat) {
       setIsPasswordMatch(true);
       console.warn("Successfully Registered");
@@ -27,7 +27,7 @@ const SignUpScreen = () => {
       alert("Password and repeat password don't match");
     }
   };
-  const onSignInPressed = () => {
+  const handleSignIn = () => {
     navigation.navigate("SignIn", { userNames: userName, passwords: password });
   };
   const onTermsofUsePressed = () => {
@@ -64,7 +64,7 @@ const SignUpScreen = () => {
           secureTextEntry
         />
 
-        <CustomButton text="Register" onPress={onRegisterPressed} />
+        <CustomButton text="Register" onPress={registerUser} />
 
         <Text style={styles.text}>
           By registering, you confirm that you accept our{" "}
@@ -81,7 +81,7 @@ const SignUpScreen = () => {
 
         <CustomButton
           text="Have an account? Sign in"
-          onPress={onSignInPressed}
+          onPress={handleSignIn}
           type="TERTIARY"
         />
       </View>

@@ -14,7 +14,7 @@ const ConfirmEmailScreen = () => {
         navigation.navigate('Home');
     }
     
-    const onSignInPressed = () => {
+    const handleSignIn = () => {
       navigation.navigate('SignIn');
   }
     const onResendPressed = () => {
@@ -44,7 +44,7 @@ const ConfirmEmailScreen = () => {
 
        <CustomButton
          text="Back to Sign in" 
-         onPress={onSignInPressed} 
+         onPress={handleSignIn} 
          type="TERTIARY"
          />
 
