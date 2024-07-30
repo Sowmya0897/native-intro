@@ -1,50 +1,31 @@
+import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
 import {
-  Text,
-  View,
   Image,
+  ScrollView,
   StyleSheet,
   useWindowDimensions,
-  ScrollView,
+  View
 } from "react-native";
 import Logo from "../../../assets/pic.jpg";
-import React, { useEffect, useState } from "react";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomInput/CustomButton";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import SocialSignInButtons from "../../components/SocialSignInButtons";
-import { useNavigation } from "@react-navigation/native";
 
-const SignInScreen = () => {
+const SignInScreen = ({ route }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [checkUsername, setCheckUsername] = useState('');
-  const [checkPassword, setCheckPassword] = useState('');
+  const userName = route.params?.userNames;
+  const passwords = route.params?.passwords;
 
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
 
-  const getData = async () => {
-    try {
-      const userName = await AsyncStorage.getItem('userName');
-      if (userName !== '') {
-       setCheckUsername(userName)
-      }
-      const password = await AsyncStorage.getItem('password');
-      if (password !== '') {
-       setCheckPassword(password);
-      }
-    } catch (e) {
-      console.log()
-    }
-  };
 
-  useEffect(() => { getData() }, []);
-  
   const onSignInPressed = () => {
     console.warn("Sign In");
     //validate user
-    console.log(username, password, checkUsername, checkPassword);
-    if (username === checkUsername && password === checkPassword) {
+    if (username === userName && password === passwords) {
       navigation.navigate("Home");
     }
   };

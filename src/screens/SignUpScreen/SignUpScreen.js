@@ -1,10 +1,9 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomInput/CustomButton";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import SocialSignInButtons from "../../components/SocialSignInButtons";
-import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
   const [userName, setUserName] = useState("");
@@ -14,24 +13,13 @@ const SignUpScreen = () => {
 
   const navigation = useNavigation();
 
-  const storeData = async (name,value) => {
-    try {
-      await AsyncStorage.setItem(name, value);
-    } catch (e) {
-      console.log(e)
-    }
-  };
-
   const onRegisterPressed = () => {
-    storeData("userName", userName);
-    storeData("password", password);
-    
     console.warn("Successfully Registered");
     // navigation.navigate("ConfirmEmail");
-    navigation.navigate("SignIn");
+    navigation.navigate("SignIn", { userNames: userName, passwords: password });
   };
   const onSignInPressed = () => {
-    navigation.navigate("SignIn");
+    navigation.navigate("SignIn", { userNames: userName, passwords: password });
   };
   const onTermsofUsePressed = () => {
     console.warn("Clicked Terms of Use");
